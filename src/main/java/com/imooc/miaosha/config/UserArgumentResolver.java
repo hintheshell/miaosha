@@ -2,7 +2,6 @@ package com.imooc.miaosha.config;
 
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.service.MiaoshaUserService;
-import com.imooc.miaosha.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -46,6 +45,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     //获得所有cookie
     private String getCookieValue(HttpServletRequest request, String cookiNameToken) {
         Cookie[] cookies = request.getCookies();
+        if(cookies == null || cookies.length <= 0){
+            return null;
+        }
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(cookiNameToken)){
                 return cookie.getValue();
