@@ -3,8 +3,10 @@ package com.imooc.miaosha.controller;
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.redis.GoodsKey;
 import com.imooc.miaosha.redis.RedisService;
+import com.imooc.miaosha.result.Result;
 import com.imooc.miaosha.service.GoodsService;
 import com.imooc.miaosha.service.MiaoshaUserService;
+import com.imooc.miaosha.vo.GoodsDetailVo;
 import com.imooc.miaosha.vo.GoodsVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,15 +83,9 @@ public class GoodsController {
      * @param goodsId 互联网公司的id使用snowflakes
      * @return
      */
-    @RequestMapping(value = "to_detail/{goodsId}", produces = "text/html")
+    @RequestMapping(value = "detail/{goodsId}")
     @ResponseBody
-    public String detail(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user, @PathVariable("goodsId") Long goodsId) {
-        model.addAttribute("user", user);
-        //取缓存
-        String html = redisService.get(GoodsKey.getGoodsDetail, "" + goodsId, String.class);
-        if (!StringUtils.isEmpty(html)) {
-            return html;
-        }
+    public Result<GoodsDetailVo> detail(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user, @PathVariable("goodsId") Long goodsId) {
 
         GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
         model.addAttribute("goods", goods);
@@ -109,15 +105,13 @@ public class GoodsController {
             miaoshaStatus = 1;
             remainSeconds = 0;
         }
-        model.addAttribute("miaoshaStatus", miaoshaStatus);
-        model.addAttribute("remainSeconds", remainSeconds);
-//        return "goods_detail";
-        WebContext ctx = new WebContext(request, response,
-                request.getServletContext(), request.getLocale(), model.asMap());
-        html = thymeleafViewResolver.getTemplateEngine().process("goods_detail", ctx);
-        if (!StringUtils.isEmpty(html)) {
-            redisService.set(GoodsKey.getGoodsDetail, "" + goodsId, html);
-        }
-        return html;
+        GoodsDetailVo vo = new GoodsDetailVo();
+        vo.setMiaoshaStatus(miaoshaStatus);
+        vo.setRemainSeconds(remainSeconds);
+        vo.setGoods(goods);
+        vo.setUser(user);
+
+
+        return Result.success(vo);
     }
 }
