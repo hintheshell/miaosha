@@ -31,15 +31,22 @@ public class OrderController {
     @Autowired
     GoodsService goodsService;
 
+    /**
+     * 获得订单详情
+     * @param model
+     * @param user
+     * @param orderId
+     * @return
+     */
     @RequestMapping("/detail")
     @ResponseBody
     public Result<OrderDetailVo> info(Model model, MiaoshaUser user,
                                       @RequestParam("orderId") long orderId) {
-        if(user == null) {
+        if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
         OrderInfo order = orderService.getOrderById(orderId);
-        if(order == null) {
+        if (order == null) {
             return Result.error(CodeMsg.ORDER_NOT_EXIST);
         }
         long goodsId = order.getGoodsId();

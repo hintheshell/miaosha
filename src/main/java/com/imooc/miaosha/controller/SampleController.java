@@ -2,6 +2,7 @@ package com.imooc.miaosha.controller;
 
 
 import com.imooc.miaosha.domain.User;
+import com.imooc.miaosha.rabbitmq.MQSender;
 import com.imooc.miaosha.redis.RedisService;
 import com.imooc.miaosha.redis.UserKey;
 import com.imooc.miaosha.result.Result;
@@ -19,6 +20,8 @@ public class SampleController {
     UserService userService;
     @Autowired
     RedisService redisService;
+    @Autowired
+    MQSender mqSender;
 
     @RequestMapping("/themaleaf")
     public String themaleaf(Model model) {
@@ -50,4 +53,13 @@ public class SampleController {
         User user = redisService.get(UserKey.getById, "" + 1, User.class);
         return Result.success(user);
     }
+
+    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> mq() {
+        mqSender.send("ssssssssdfsa");
+        return Result.success("hhh");
+    }
+
+
 }
