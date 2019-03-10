@@ -1,5 +1,6 @@
 package com.imooc.miaosha.controller;
 
+import com.imooc.access.AccessLimit;
 import com.imooc.miaosha.domain.MiaoshaOrder;
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.domain.OrderInfo;
@@ -185,12 +186,12 @@ public class MiaoshaController implements InitializingBean {
     /**
      * 获取秒杀地址
      *
-     * @param model
      * @param user
      * @param goodsId
      * @param verifyCode
      * @return
      */
+    @AccessLimit(seconds = 5, maxCount = 5, needLogin = true)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> getMiaoshaPath(
