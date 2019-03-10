@@ -1,4 +1,4 @@
-package com.imooc.access;
+package com.imooc.miaosha.access;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

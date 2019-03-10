@@ -1,4 +1,4 @@
-package com.imooc.access;
+package com.imooc.miaosha.access;
 
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.redis.RedisService;

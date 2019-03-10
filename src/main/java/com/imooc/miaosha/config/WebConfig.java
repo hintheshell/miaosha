@@ -1,6 +1,6 @@
 package com.imooc.miaosha.config;
 
-import com.imooc.access.AccessInterceptor;
+import com.imooc.miaosha.access.AccessInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

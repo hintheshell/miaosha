@@ -1,6 +1,6 @@
 package com.imooc.miaosha.config;
 
-import com.imooc.access.UserContext;
+import com.imooc.miaosha.access.UserContext;
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.service.MiaoshaUserService;
 import org.springframework.beans.factory.annotation.Autowired;

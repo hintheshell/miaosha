@@ -1,6 +1,6 @@
 package com.imooc.miaosha.controller;
 
-import com.imooc.access.AccessLimit;
+import com.imooc.miaosha.access.AccessLimit;
 import com.imooc.miaosha.domain.MiaoshaOrder;
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.domain.OrderInfo;

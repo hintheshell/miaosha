@@ -1,4 +1,4 @@
-package com.imooc.access;
+package com.imooc.miaosha.access;
 
 import com.imooc.miaosha.domain.MiaoshaUser;
 import com.imooc.miaosha.redis.AccessKey;
@@ -28,7 +28,7 @@ public class AccessLimitImpl {
     @Autowired
     RedisService redisService;
 
-    @Pointcut(value = "@annotation(com.imooc.access.AccessLimit) ")
+    @Pointcut(value = "@annotation(com.imooc.miaosha.access.AccessLimit) ")
     private void cut() {
     }
 
